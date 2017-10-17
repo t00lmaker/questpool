@@ -1,11 +1,23 @@
-# README
+# Questpool
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Essa aplicação tem a finalidade de ser um repositório de questões, onde será
+possível criar questões que poderão ser avaliadas por um administrador, que
+por sua vez poderá fazer sugestões de como melhorar as questões adicionadas pelos
+demais usuários.   
 
-Things you may want to cover:
+### Especificações Técnicas
 
-* Ruby version
+* Versão Ruby
+  2.3.4
+
+* Rails
+  5.1.4
+
+* Banco de Dados
+  Mysql
+
+* Schema de Autenticação
+  [Device] (https://github.com/plataformatec/devise)
 
 * System dependencies
 
