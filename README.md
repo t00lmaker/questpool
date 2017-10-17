@@ -7,17 +7,13 @@ demais usuários.
 
 ### Especificações Técnicas
 
-* Versão Ruby
-  2.3.4
+* Versão Ruby: 2.3.4
 
-* Rails
-  5.1.4
+* Rails: 5.1.4
 
-* Banco de Dados
-  Mysql
+* Banco de Dados: Mysql
 
-* Schema de Autenticação
-  [Device] (https://github.com/plataformatec/devise)
+* Schema de Autenticação: [Device](https://github.com/plataformatec/devise)
 
 * System dependencies
 
