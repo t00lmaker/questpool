@@ -23,3 +23,10 @@
 ul.hmenu li {
   display: inline;
 }
+
+table {
+  border-width: 1px;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 2px;
+}

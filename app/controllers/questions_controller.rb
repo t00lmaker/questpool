@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :approve, :disapprove ]
   before_action :authenticate_user!
 
   # GET /questions
@@ -64,6 +64,15 @@ class QuestionsController < ApplicationController
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def approve
+    puts 'Uala'
+    puts @question
+  end
+
+  def disapprove
+    puts @question
   end
 
   private

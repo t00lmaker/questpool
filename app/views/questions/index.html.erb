@@ -4,54 +4,52 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Content</th>
-      <th>Year</th>
-      <th>Source</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
   </thead>
 
   <tbody>
-    <tr><td colspan="8" ><h4>Pendentes</h4></td></tr>
+    <tr><td colspan="7" ><h4>Pendentes</h4></td></tr>
     <% @pending.each do |question| %>
       <tr>
+        <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
         <td><%= question.content %></td>
         <td><%= question.year %></td>
         <td><%= question.source %></td>
+        <% if current_user.admin? %>
         <td><%= question.user.email %></td>
-        <td><%= question.status %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Revisar', question %></td>
+        <% else %>
+        <td><%= link_to 'Editar', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
-    <tr><td colspan="8" ><h4>Reprovadas</h4></td></tr>
+    <tr><td colspan="7" ><h4>Reprovadas</h4></td></tr>
     <% @rejected.each do |question| %>
       <tr>
+        <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
         <td><%= question.content %></td>
         <td><%= question.year %></td>
         <td><%= question.source %></td>
+        <% if current_user.admin? %>
         <td><%= question.user.email %></td>
-        <td><%= question.status %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <% else %>
+        <td><%= link_to 'Corrigir', question %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
-  <tr><td colspan="8" ><h4>Aprovadas</h4></td></tr>
+  <tr><td colspan="7" ><h4>Aprovadas</h4></td></tr>
   <% @approved.each do |question| %>
     <tr>
+      <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
       <td><%= question.content %></td>
       <td><%= question.year %></td>
       <td><%= question.source %></td>
       <td><%= question.user.email %></td>
-      <td><%= question.status %></td>
-      <td><%= link_to 'Show', question %></td>
-      <td><%= link_to 'Edit', edit_question_path(question) %></td>
-      <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if current_user.admin? %>
+      <td><%= question.user.email %></td>
+      <% end %>
     </tr>
   <% end %>
 </tbody>

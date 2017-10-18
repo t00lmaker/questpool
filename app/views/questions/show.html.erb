@@ -24,6 +24,10 @@
   <strong>Status:</strong>
   <%= @question.status %>
 </p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<% if current_user.admin? %>
+  <%= link_to 'Aprovar', approve_question_url(@question), method: :post %> |
+  <%= link_to 'Reprovar', disapprove_question_url(@question), method: :post %>
+<%else%>
+  <%= link_to 'Edit', edit_question_path(@question) %> |
+  <%= link_to 'Back', questions_path %>
+<% end %>
