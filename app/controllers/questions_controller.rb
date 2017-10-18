@@ -1,10 +1,15 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    user = current_user
+    questions = user.admin? ? Question.all : Question.where(user: user)
+    @pending = questions.select {|q| q.status == 'Pendente'} # TODO colocar status em 'Enum'
+    @approved = questions.select {|q| q.status == 'Aprovada'} # TODO colocar status em 'Enum'
+    @rejected = questions.select {|q| q.status == 'Reprovada'} # TODO colocar status em 'Enum'
   end
 
   # GET /questions/1
