@@ -1,22 +1,30 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Content:</strong>
   <%= @question.content %>
 </p>
 
+<ul>
+<% for alt in @question.alternatives %>
+  <li>
+    <%= alt.content %>
+    <% if alt.correct %>
+      - Correta
+    <% end%>
+  </li>
+<%end%>
+</ul>
+
 <p>
-  <strong>Year:</strong>
+  <strong>Ano:</strong>
   <%= @question.year %>
 </p>
 
 <p>
-  <strong>Source:</strong>
+  <strong>Fonte:</strong>
   <%= @question.source %>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Usuário:</strong>
   <%= @question.user.email %>
 </p>
 
@@ -24,9 +32,16 @@
   <strong>Status:</strong>
   <%= @question.status %>
 </p>
-<% if current_user.admin? %>
+
+<% if current_user.admin? && @question.status == 'pendente' %>
   <%= link_to 'Aprovar', approve_question_url(@question), method: :post %> |
-  <%= link_to 'Reprovar', disapprove_question_url(@question), method: :post %>
+
+  <%= form_tag(disapprove_question_url(@question), method: "post") do %>
+    <%= label_tag(:hint, "Dica") %>
+    <%= text_area_tag(:hint) %>
+    <%= submit_tag("Reprovar") %>
+  <% end %>
+
 <%else%>
   <%= link_to 'Edit', edit_question_path(@question) %> |
   <%= link_to 'Back', questions_path %>

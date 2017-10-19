@@ -7,9 +7,9 @@ class QuestionsController < ApplicationController
   def index
     user = current_user
     questions = user.admin? ? Question.all : Question.where(user: user)
-    @pending = questions.select {|q| q.status == 'Pendente'} # TODO colocar status em 'Enum'
-    @approved = questions.select {|q| q.status == 'Aprovada'} # TODO colocar status em 'Enum'
-    @rejected = questions.select {|q| q.status == 'Reprovada'} # TODO colocar status em 'Enum'
+    @pending = questions.select {|q| q.status == 'pendente'} # TODO colocar status em 'Enum'
+    @approved = questions.select {|q| q.status == 'aprovada'} # TODO colocar status em 'Enum'
+    @rejected = questions.select {|q| q.status == 'reprovada'} # TODO colocar status em 'Enum'
   end
 
   # GET /questions/1
@@ -19,7 +19,11 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @question = Question.new
+    @question = Question.new(alternatives: [Alternative.new(content: "A"),
+                     Alternative.new(content: "B"),
+                     Alternative.new(content: "C"),
+                     Alternative.new(content: "D"),
+                     Alternative.new(content: "E")])
   end
 
   # GET /questions/1/edit
@@ -30,6 +34,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
 
     respond_to do |format|
       if @question.save
@@ -45,6 +50,9 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    if(@question.status == 'reprovada')
+      @question.make_pending!
+    end
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -67,13 +75,21 @@ class QuestionsController < ApplicationController
   end
 
   def approve
-    puts 'Uala'
-    puts @question
+    @question.approve!
+    @question.save
+    redirect_to @question, notice: 'Questão foi aprovada!'
   end
 
   def disapprove
-    puts @question
+    if params[:hint].nil? || params[:hint].empty?
+      redirect_to @question, alert: 'Dica é necessária para reprovar a questão!'
+    else
+      @question.disapprove!(params[:hint], current_user)
+      @question.save
+      redirect_to @question, notice: 'Questão foi reprovada!'
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -83,6 +99,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:content, :year, :source, :user_id)
+      params.require(:question).permit(:content, :year, :source, :user_id, alternatives_attributes: [:id, :content, :correct, :_destroy])
     end
 end

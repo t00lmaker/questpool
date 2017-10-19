@@ -1,4 +1,5 @@
 <%= form_with(model: question, local: true) do |form| %>
+
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -18,7 +19,7 @@
 
   <div class="field">
     <%= form.label :year %>
-    <%= form.text_field :year, id: :question_year %>
+    <%= form.select :year, 2000..2017, selected: 2017, id: :question_year %>
   </div>
 
   <div class="field">
@@ -26,10 +27,17 @@
     <%= form.text_field :source, id: :question_source %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :question_user_id %>
-  </div>
+  <ul>
+  <%= form.fields_for :alternatives do |alter_forms| %>
+    <li>
+      <div class="field">
+        <%= alter_forms.text_field :content %>
+        <%= alter_forms.label "correta?" %>
+        <%= alter_forms.check_box :correct %>
+      </div>
+    </li>
+  <% end %>
+  </ul>
 
   <div class="actions">
     <%= form.submit %>

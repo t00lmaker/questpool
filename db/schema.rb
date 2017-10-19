@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20171018175757) do
 
   create_table "alternatives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "content"
-    t.boolean "correct"
+    t.text "content", null: false
+    t.boolean "correct", default: false
     t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171018175757) do
   end
 
   create_table "hints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "content"
+    t.text "content", null: false
     t.bigint "user_id"
     t.bigint "question_id"
     t.datetime "created_at", null: false
@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(version: 20171018175757) do
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text "content"
-    t.string "year"
-    t.string "source"
+    t.text "content", null: false
+    t.string "year", null: false
+    t.string "source", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status", default: "Pendente", null: false
+    t.string "status", default: "pendente", null: false
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
