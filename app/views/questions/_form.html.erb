@@ -1,3 +1,4 @@
+<div class="row">
 <%= form_with(model: question, local: true) do |form| %>
 
   <% if question.errors.any? %>
@@ -12,34 +13,46 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, id: :question_content %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= form.label :enuciado %>
+      <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.select :year, 2000..2017, selected: 2017, id: :question_year %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= form.label :fonte %>
+      <%= form.text_field :source, id: :question_source %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :source %>
-    <%= form.text_field :source, id: :question_source %>
+
+  <div class="field col s6">
+    <%= form.label :ano %>
+    <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
   </div>
 
-  <ul>
-  <%= form.fields_for :alternatives do |alter_forms| %>
-    <li>
-      <div class="field">
-        <%= alter_forms.text_field :content %>
-        <%= alter_forms.label "correta?" %>
-        <%= alter_forms.check_box :correct %>
+  <div class="row">
+    <div class="input-field col s9">
+      <h5>Alternativas</h5>
+    <%= form.fields_for :alternatives do |alter_forms| %>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
+          <%= alter_forms.text_field :content %>
+        </div>
+        <div class="input-field col s3">
+          <%= alter_forms.label :correct %>
+          <%= alter_forms.check_box :correct%>
+        </div>
       </div>
-    </li>
-  <% end %>
-  </ul>
+    <% end %>
+    </div>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <button class="btn waves-effect waves-light" name="action" type="submit">Salvar<i class="material-icons right">save</i></button>
   </div>
 <% end %>
+</div>
