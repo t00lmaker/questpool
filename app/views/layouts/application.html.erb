@@ -2,17 +2,16 @@
 <html>
  <head>
   <header class="navbar-fixed">
-    <nav class="light-blue darken-1">
+    <nav class="light-pink darken-1">
       <div class="nav-wrapper container">
-        <a class="button-collapse show-on-large"  id="sidenav">
-          <i class="material-icons left">Questpool</i></a>
-          <ul class="right" id="nav-mobile">
-            <%= render 'devise/menu/registration_items' %>
-            <%= render 'devise/menu/login_items' %>
-          </ul>
-        </div>
-      </nav><!--Tap Target Structure-->
-    </header>
+        <a>Questpool</a>
+        <ul class="right" >
+          <%= render 'devise/menu/login_items' %>
+          <%= render 'devise/menu/registration_items' %>
+        </ul>
+      </div>
+    </nav><!--Tap Target Structure-->
+  </header>
     <title>Questpool</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
