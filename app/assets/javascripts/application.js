@@ -13,3 +13,9 @@
 //= require jquery
 //= require materialize
 //= require_tree .
+
+$().ready(function(){
+  $("a#historico_hints").click(function(){
+    $("div#historico_hints_list").slideToggle();
+  });
+});

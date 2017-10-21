@@ -1,58 +1,56 @@
-<div class="row">
-<%= form_with(model: question, local: true) do |form| %>
 
-  <% if question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+    <%= form_with(model: question, local: true) do |form| %>
 
-      <ul>
-      <% question.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% if question.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-  <div class="row">
-    <div class="input-field col s6">
-      <%= form.label :enuciado %>
-      <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s6">
-      <%= form.label :fonte %>
-      <%= form.text_field :source, id: :question_source %>
-    </div>
-  </div>
-
-
-  <div class="field col s6">
-    <%= form.label :ano %>
-    <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s9">
-      <h5>Alternativas</h5>
-    <%= form.fields_for :alternatives do |alter_forms| %>
-      <div class="row">
-        <div class="input-field col s6">
-          <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
-          <%= alter_forms.text_field :content %>
+          <ul>
+          <% question.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
         </div>
-        <div class="input-field col s3">
-          <%= alter_forms.label :correct %>
-          <%= alter_forms.check_box :correct%>
+      <% end %>
+
+      <div class="row">
+        <div class="input-field col s8">
+          <%= form.label :enuciado %>
+          <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
         </div>
       </div>
-    <% end %>
-    </div>
-  </div>
 
-  <div class="actions">
-    <button class="btn waves-effect waves-light" name="action" type="submit">Salvar<i class="material-icons right">save</i></button>
-  </div>
-<% end %>
-</div>
+      <div class="row">
+        <div class="input-field col s8">
+          <%= form.label :fonte %>
+          <%= form.text_field :source, id: :question_source %>
+        </div>
+      </div>
+
+      <div class="field col s8">
+        <%= form.label :ano %>
+        <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s8">
+          <h5>Alternativas</h5>
+        <%= form.fields_for :alternatives do |alter_forms| %>
+          <div class="row">
+            <div class="input-field col s10">
+              <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
+              <%= alter_forms.text_area :content, id: :content, class: "materialize-textarea" %>
+            </div>
+            <div class="input-field col s2">
+              <%= alter_forms.check_box :correct%>
+              <%= alter_forms.label ' ' %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn waves-effect waves-light" name="action" type="submit">Salvar<i class="material-icons right">save</i></button>
+      </div>
+    <% end %>

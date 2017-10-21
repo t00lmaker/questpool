@@ -1,0 +1,32 @@
+
+<% hints = question.hints %>
+<% last_hint = hints.last %>
+<% if question.status == 'reprovada' %>
+  <p>Essa questão está reprovada e foi dada a seguinte sugestão: </p>
+  <p style="color: gray; background-color: #ddd; padding: 2%; border-radius: 5px">
+    <i>
+      "<%= last_hint.content %>"
+    </i>
+  </p>
+  <p>Por <i><%= last_hint.user.email %> </i>em <%= last_hint.created_at.strftime('%d/%m/%Y') %></p>
+<% end %>
+<% if hints.size > 0%>
+  <p>
+    <%= link_to "Histórico de Sugestões", "#",  id: :historico_hints %>
+  </p>
+  <div id="historico_hints_list" style="display: none">
+    <% hints.reverse.each do |hint| %>
+      <div class="row">
+        <div class="col s6">
+          <%= hint.content %>
+        </div>
+        <div class="col s3">
+          <%= hint.created_at.strftime('%d/%m/%Y') %>
+        </div>
+        <div class="col s3">
+          <%= hint.user.email %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
