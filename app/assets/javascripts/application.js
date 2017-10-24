@@ -18,4 +18,9 @@ $().ready(function(){
   $("a#historico_hints").click(function(){
     $("div#historico_hints_list").slideToggle();
   });
+
+  var notice = $('#notice').attr('value');
+  notice = notice + $('#alert').attr('value');
+  Materialize.toast(notice, 5000)
+
 });

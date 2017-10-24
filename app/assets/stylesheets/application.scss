@@ -11,8 +11,22 @@ $secondary-color: color("blue", "base") !default;
    width: 80%;
  }
 
- .enunciado{
+ .content{
    font-size: 23px;
+ }
+
+ .mark-alternativa{
+   height: 20px;
+   border-radius: 10%;
+   margin-right: 1%;
+ }
+
+ .correta{
+   background-color: color("green", "lighten-3");
+ }
+
+ .incorreta{
+   background-color: color("red", "lighten-3");
  }
 
 table {

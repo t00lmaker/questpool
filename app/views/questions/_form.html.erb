@@ -27,23 +27,25 @@
         </div>
       </div>
 
-      <div class="field col s8">
-        <%= form.label :ano %>
-        <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
+      <div class="row">
+        <div class="col s8">
+          <%= form.label :ano %>
+          <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
+        </div>
       </div>
 
       <div class="row">
-        <div class="input-field col s8">
+        <div class="col s8">
           <h5>Alternativas</h5>
         <%= form.fields_for :alternatives do |alter_forms| %>
           <div class="row">
-            <div class="input-field col s10">
+            <div class="col s2">
+              <%= alter_forms.check_box :correct, id:"correct_#{alter_forms.options[:child_index]}" %>
+              <%= alter_forms.label ' ', for:"correct_#{alter_forms.options[:child_index]}" %>
+            </div>
+            <div class="col s10">
               <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
               <%= alter_forms.text_area :content, id: :content, class: "materialize-textarea" %>
-            </div>
-            <div class="input-field col s2">
-              <%= alter_forms.check_box :correct%>
-              <%= alter_forms.label ' ' %>
             </div>
           </div>
         <% end %>

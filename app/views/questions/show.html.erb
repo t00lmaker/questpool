@@ -17,7 +17,7 @@
      Essa questão está <i><%= @question.status %></i>.
    </p>
 
-   <p class="enunciado">
+   <p class="content">
      <%= @question.content %>
      <br> -
      <span>
@@ -27,12 +27,10 @@
    <% i = 0%>
    <% for alt in @question.alternatives %>
      <div class="row">
-       <div class="col s7">
+       <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
+       <div class="col s">
          <%= ('A'..'E').to_a[i] %>)
           <%= alt.content %>
-         <% if alt.correct %>
-          - Correta
-         <% end%>
          <% i = i+1%>
        </div>
      </div>

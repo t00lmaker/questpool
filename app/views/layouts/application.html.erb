@@ -20,8 +20,9 @@
 
   <body>
     <div id="content"   class="container">
-      <p id="notice" class="notice"><%= notice %></p>
-      <p id="alert" class="alert"><%= alert %></p>
+      <input id="notice" type="hidden" value="<%= notice %>">
+      <input id="alert" type="hidden" value="<%= alert %>">
+
       <%= yield %>
     <div>
   </body>
