@@ -3,7 +3,7 @@
 
       <% if question.errors.any? %>
       <div class="row" >
-        <div id="error_explanation" class="col s6 form-validation">
+        <div id="error_explanation" class="col s12 form-validation">
           <h5> A questão pode ser salva, <%= pluralize(question.errors.count, "problema") %> :</h5>
           <ul>
           <% question.errors.full_messages.each do |message| %>
@@ -16,7 +16,7 @@
 
       <div class="row">
         <div class="input-field col s8">
-          <%= form.label :enuciado, for: :content,  %>
+          <%= form.label :enuciado, for: :content %>
           <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
         </div>
       </div>
