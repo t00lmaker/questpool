@@ -5,6 +5,10 @@ $secondary-color: color("blue", "base") !default;
 @import 'materialize';
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
+body{
+  background-color: #eee;
+}
+
  .container{
    margin: 0 auto;
    max-width: 1280px;
@@ -12,7 +16,8 @@ $secondary-color: color("blue", "base") !default;
  }
 
  .content{
-   font-size: 23px;
+   font-size: 18px;
+   font-weight: 300;
  }
 
  .mark-alternativa{

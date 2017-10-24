@@ -34,4 +34,4 @@ demais usuários.
 ### TODOS
 
 * Tradução de campos e Modelos, hora funciona, hora não funciona.
-* 
+* Metodos approve e disapprove estão como get, por conta de um problema com a autenticação do devise devem ser post.

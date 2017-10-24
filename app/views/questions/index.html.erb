@@ -1,58 +1,130 @@
-<h1>Questions</h1>
-
-<table>
-  <thead>
-  </thead>
-
-  <tbody>
-    <tr><td colspan="7" ><h4>Pendentes</h4></td></tr>
-    <% @pending.each do |question| %>
-      <tr>
-        <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
-        <td><%= question.content %></td>
-        <td><%= question.year %></td>
-        <td><%= question.source %></td>
-        <% if current_user.admin? %>
-        <td><%= question.user.email %></td>
-        <td><%= link_to 'Revisar', question %></td>
-        <% else %>
-        <td><%= link_to 'Editar', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-    <tr><td colspan="7" ><h4>Reprovadas</h4></td></tr>
-    <% @rejected.each do |question| %>
-      <tr>
-        <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
-        <td><%= question.content %></td>
-        <td><%= question.year %></td>
-        <td><%= question.source %></td>
-        <% if current_user.admin? %>
-        <td><%= question.user.email %></td>
-        <% else %>
-        <td><%= link_to 'Corrigir',  edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-  <tr><td colspan="7" ><h4>Aprovadas</h4></td></tr>
-  <% @approved.each do |question| %>
-    <tr>
-      <td><%= link_to question.id, question, {title: "Mostra Questão"} %></td>
-      <td><%= question.content %></td>
-      <td><%= question.year %></td>
-      <td><%= question.source %></td>
-      <td><%= question.user.email %></td>
-      <% if current_user.admin? %>
-      <td><%= question.user.email %></td>
-      <% end %>
-    </tr>
+<% if @pending.any? %>
+<h5>Pendentes</h5>
+<ul class="collapsible" data-collapsible="accordion" >
+  <% @pending.each do |question| %>
+  <li>
+    <div class="collapsible-header">
+      <%= link_to "\##{question.id}", question, {title: "Mostra Questão"} %> &nbsp
+      (<%= question.source %>, <%= question.year %>)&nbsp
+      <%= question.content %>
+    </div>
+    <div class="collapsible-body" style="background-color: #fff">
+      <div class="row">
+        <div class="col s4">
+           Por <i><%= question.user.email%></i>
+        </div>
+        <div class="col s4">
+          <% if current_user.admin? %>
+            <%= link_to 'Revisar', question %>
+          <% else %>
+            <%= link_to 'Editar', edit_question_path(question) %> &nbsp
+            <%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%end%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s4">
+          <% i = 0%>
+          <% for alt in question.alternatives %>
+          <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
+          <div class="col s10">
+            <%= ('A'..'E').to_a[i] %>)
+             <%= alt.content %>
+            <% i = i+1%>
+          </div>
+          <% end %>
+        </div>
+        <div class="col s6">
+          <%= render 'last_hint_and_list', question: question %>
+        </div>
+      </div>
+    </div>
+  </li>
   <% end %>
-</tbody>
-</table>
+</ul>
+<% end %>
 
-<br>
+<% if  @rejected.any? %>
+<h5>Reprovadas</h5>
+<ul class="collapsible" data-collapsible="accordion" >
+  <% @rejected.each do |question| %>
+  <li>
+    <div class="collapsible-header">
+      <%= link_to "\##{question.id}", question, {title: "Mostra Questão"} %> &nbsp
+      (<%= question.source %>, <%= question.year %>)&nbsp
+      <%= question.content %>
+    </div>
+    <div class="collapsible-body" style="background-color: #fff">
+      <div class="row">
+        <div class="col s4">
+           Por <i><%= question.user.email%></i>
+        </div>
+        <div class="col s4">
+          <% unless current_user.admin? %>
+          <td><%= link_to 'Corrigir',  edit_question_path(question) %></td>
+          <td><%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s4">
+          <% i = 0%>
+          <% for alt in question.alternatives %>
+          <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
+          <div class="col s10">
+            <%= ('A'..'E').to_a[i] %>)
+             <%= alt.content %>
+            <% i = i+1%>
+          </div>
+          <% end %>
 
-<%= link_to 'New Question', new_question_path %>
+        </div>
+        <div class="col s6">
+          <%= render 'last_hint_and_list', question: question %>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if  @approved.any? %>
+<h5>Aprovadas</h5>
+<ul class="collapsible" data-collapsible="accordion" >
+  <% @approved.each do |question| %>
+  <li>
+    <div class="collapsible-header">
+      <%= link_to "\##{question.id}", question, {title: "Mostra Questão"} %> &nbsp
+      (<%= question.source %>, <%= question.year %>)&nbsp
+      <%= question.content %>
+    </div>
+    <div class="collapsible-body" style="background-color: #fff">
+      <div class="row">
+        <div class="col s4">
+          <% i = 0%>
+          <% for alt in question.alternatives %>
+          <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
+          <div class="col s10">
+            <%= ('A'..'E').to_a[i] %>)
+             <%= alt.content %>
+            <% i = i+1%>
+          </div>
+          <% end %>
+
+        </div>
+        <div class="col s6">
+          <%= render 'last_hint_and_list', question: question %>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_question_path %>">
+    <i class="material-icons">add</i>
+  </a>
+</div>

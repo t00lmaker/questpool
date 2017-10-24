@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :questions do
     member do
-      post "approve"
-      post "disapprove"
+      get "approve"
+      get "disapprove"
     end
   end
   devise_for :users

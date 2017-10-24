@@ -1,42 +1,104 @@
 <div class="row">
-  <div class="col s7">
-    <h3>Questão #<%= @question.id %></h3>
-    <p>
-      <% unless current_user.admin? %>
-        <% if @question.status == 'pendente'%>
-          <%= link_to 'Editar', edit_question_path(@question)  %> |
-        <% end %>
-        <% if @question.status == 'reprovada'%>
-          <%= link_to 'Corrigir', edit_question_path(@question)  %> |
-        <% end %>
-      <% end %>
-     <%= link_to 'Lista de Questões', questions_path %>
-   </p>
-
-   <p>
-     Essa questão está <i><%= @question.status %></i>.
-   </p>
-
-   <p class="content">
-     <%= @question.content %>
-     <br> -
-     <span>
-       <%= @question.source %>, <%= @question.year %>
-     </span>
-   </p>
-   <% i = 0%>
-   <% for alt in @question.alternatives %>
-     <div class="row">
-       <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
-       <div class="col s">
-         <%= ('A'..'E').to_a[i] %>)
-          <%= alt.content %>
-         <% i = i+1%>
-       </div>
+  <div class="col s10">
+    <div class="card-panel">
+      <div style="margin: 0 5%">
+          <div class="row">
+            <div class="col s11">
+              <h4>Questão #<%= @question.id %></h4>
+              <p>
+              Esta questão está <i><%= @question.status %></i>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <p class="content">
+              (<%= @question.source %>, <%= @question.year %>)&nbsp
+              <%= @question.content %>
+              <br>
+            </p>
+            <% i = 0%>
+            <% for alt in @question.alternatives %>
+              <div class="row">
+                <div class="col s1 mark-alternativa <%= alt.correct ? 'correta' : 'incorreta'%>"></div>
+                <div class="col s9">
+                  <%= ('A'..'E').to_a[i] %>)
+                   <%= alt.content %>
+                  <% i = i+1%>
+                </div>
+              </div>
+            <%end%>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col s8">
+              <%= render 'last_hint_and_list', question: @question %>
+            </div>
+          </div>
      </div>
-   <%end%>
+   </div>
+  </div>
  </div>
- <div class="col s5">
-    <%= render 'last_hint_and_list', question: @question %>
- </div>
-</div>
+
+
+  <div class="fixed-action-btn ">
+    <a class="btn-floating btn-large">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul>
+      <% if current_user.admin? && @question.status == 'pendente' %>
+        <li>
+          <a id="approve_link" class="btn-floating green tooltipped modal-trigger" data-target="approve_modal" data-tooltip="Aprovar" data-position="left" data-delay="50">
+            <i class="material-icons">done</i>
+          </a>
+        </li>
+        <li>
+          <a id="disapprove_link" class="btn-floating red tooltipped modal-trigger" data-tooltip="Reprovar" data-position="left" data-delay="50" data-target="disapprove_modal">
+            <i class="material-icons">info_outline</i>
+          </a>
+        </li>
+      <% end %>
+      <% if !current_user.admin? && @question.status != 'aprovada' %>
+        <li>
+          <a href="<%= edit_question_path(@question) %>" class="btn-floating yellow darken-1 tooltipped" data-tooltip="Alterar/Corrigir" data-position="left" data-delay="50">
+            <i class="material-icons">create</i>
+          </a>
+        </li>
+      <% end %>
+      <li>
+        <a href="<%= questions_path %>" class="btn-floating orange tooltipped" data-tooltip="Listagem" data-position="left" data-delay="50">
+          <i class="material-icons">list </i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="approve_modal" class="modal">
+    <div class="modal-content">
+      <h5>Você tem certeza que deseja aprovar essa pergunta? </h5>
+      <p>
+        Após a aprovação o status
+        não poderá ser alterado.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      <a id="approve_link_modal" href="<%= approve_question_url(@question) %>" class="modal-action modal-close waves-effect waves-green btn-flat">Aprovar</a>
+      </form>
+    </div>
+  </div>
+
+  <div id="disapprove_modal" class="modal">
+    <div class="modal-content">
+      <h5>Faça uma sugestão para que a pegunta possa ser aprovada. </h5>
+      <form id="disapprove_form_modal" class="" action="<%= disapprove_question_url(@question) %>" method="get">
+          <textarea type="text_area" name="hint">
+          </textarea>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+      </button>
+    </div>
+    </form>
+  </div>

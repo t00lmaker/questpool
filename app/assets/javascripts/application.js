@@ -19,6 +19,14 @@ $().ready(function(){
     $("div#historico_hints_list").slideToggle();
   });
 
+  $("a#approve_link").on("click", function(e) {
+     $('#approve_modal').modal();
+  });
+
+  $("a#disapprove_link").on("click", function(e) {
+    $('#disapprove_modal').modal();
+  });
+
   var notice = $('#notice').attr('value');
   notice = notice + $('#alert').attr('value');
   Materialize.toast(notice, 5000)
