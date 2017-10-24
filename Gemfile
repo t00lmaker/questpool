@@ -33,11 +33,20 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+## ---- Gems personalizadas ----
+
+# todo mundo sabe pra que server
 gem 'devise'
+
+# jquery 1, 2 ou 3
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
+
+# icons do Material design
 gem 'material_icons'
+
+# framwork para adicionar a aplicação style Material
 gem 'materialize-sass'
+## ---- Fim gems personalizadas ----
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
