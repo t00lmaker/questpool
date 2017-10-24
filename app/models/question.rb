@@ -33,7 +33,7 @@ class Question < ApplicationRecord
   end
 
   def validate_one_correct
-    errors.add(:alternatives, "devem ter uma correta") if alternatives.select{|a| a.correct}.size != 1
+    errors.add(:alternatives, "devem ter uma marcada como correta") if alternatives.select{|a| a.correct}.size != 1
   end
 
 end

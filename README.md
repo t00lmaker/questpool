@@ -30,3 +30,8 @@ demais usuários.
 * Deployment instructions
 
 * ...
+
+### TODOS
+
+* Tradução de campos e Modelos, hora funciona, hora não funciona.
+* 

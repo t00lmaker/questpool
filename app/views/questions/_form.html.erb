@@ -2,20 +2,21 @@
     <%= form_with(model: question, local: true) do |form| %>
 
       <% if question.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
+      <div class="row" >
+        <div id="error_explanation" class="col s6 form-validation">
+          <h5> A questão pode ser salva, <%= pluralize(question.errors.count, "problema") %> :</h5>
           <ul>
           <% question.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+            <li>- <i><%= message %></i></li>
           <% end %>
           </ul>
         </div>
+      </div>
       <% end %>
 
       <div class="row">
         <div class="input-field col s8">
-          <%= form.label :enuciado %>
+          <%= form.label :enuciado, for: :content,  %>
           <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
         </div>
       </div>

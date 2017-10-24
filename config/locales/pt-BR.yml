@@ -1,6 +1,19 @@
 pt-BR:
   activerecord:
     errors:
+      models:
+        user: "Usuário"
+        question:
+          one: "Questão"
+          other: "Questões"
+        alternative: Alternativa
+        hint: Sugestão
+      attributes:
+        question:
+            content: "Conteúdo"
+            source: "Fonte"
+            year: "Ano"
+            alternatives: "alternativas"
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:

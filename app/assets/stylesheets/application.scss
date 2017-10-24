@@ -29,6 +29,13 @@ $secondary-color: color("blue", "base") !default;
    background-color: color("red", "lighten-3");
  }
 
+ .form-validation{
+   background-color: #eee;
+   padding: 2%;
+   color: color("red", "lighten-2");
+   border-radius: 5px;
+ }
+
 table {
   border-width: 1px;
   display: table;
