@@ -131,9 +131,10 @@
   <% end %>
 </ul>
 <% end %>
-
+<% unless current_user.admin? %>
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large waves-effect waves-light" href="<%= new_question_path %>">
     <i class="material-icons">add</i>
   </a>
 </div>
+<% end %>
