@@ -1,13 +1,2 @@
-<div class="row">
-  <div class="col s7">
-    <h3>Questão #<%= @question.id %></h3>
-    <p>
-     <%= link_to 'Show', @question %> |
-     <%= link_to 'Lista de Questões', questions_path %>
-   </p>
-    <%= render 'form', question: @question %>
-  </div>
-  <div class="col s5">
-    <%= render 'last_hint_and_list', question: @question %>
-  </div>
-</div>
+
+<%= render 'form', question: @question %>

@@ -4,10 +4,10 @@
   <header class="navbar-fixed">
     <nav class="light-pink darken-1">
       <div class="nav-wrapper container">
-        <a>Questpool</a>
+        <%= link_to "Questpool", root_path %>
         <ul class="right" >
-          <%= render 'devise/menu/login_items' %>
           <%= render 'devise/menu/registration_items' %>
+          <%= render 'devise/menu/login_items' %>
         </ul>
       </div>
     </nav><!--Tap Target Structure-->

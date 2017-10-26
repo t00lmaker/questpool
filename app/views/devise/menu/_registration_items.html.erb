@@ -1,9 +1,17 @@
 <% if user_signed_in? %>
   <li>
-  <%= link_to('Conta', edit_user_registration_path) %>
+    <li>
+      <a href="<%= edit_user_registration_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Ver sua Conta">
+        <i class="material-icons left">account_box</i>
+        <%= current_user.email %>
+      </a>
+    </li>
   </li>
 <% else %>
   <li>
-  <%= link_to('Registra-se', new_user_registration_path)  %>
+    <a href="  <%= new_user_registration_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Registrar-se">
+      <i class="material-icons left">account_box</i>
+        Registrar-se
+      </a>
   </li>
 <% end %>

@@ -1,9 +1,13 @@
 <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path) %>
-  </li>
+<li>
+  <a href="<%= destroy_user_session_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Sair">
+    <i class="material-icons">exit_to_app</i>
+  </a>
+</li>
 <% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>
-  </li>
+<li>
+  <a href="  <%= new_user_session_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Entrar">
+    <i class="material-icons">exit_to_app</i>
+  </a>
+</li>
 <% end %>

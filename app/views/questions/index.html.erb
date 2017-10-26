@@ -1,3 +1,12 @@
+<% unless @pending.any? or @rejected.any? or @approved.any? %>
+  <div class="row">
+    <div class="col offset-s2 s8">
+      <p style="color: gray; font-size: 23px; text-align: center; margin-top: 30%">
+        Você não possui nenhuma questão cadastrada, use o botão abaixo para
+        cadastrar novas questões. </p>
+    </div>
+  </div>
+<% end %>
 <% if @pending.any? %>
 <h5>Pendentes</h5>
 <ul class="collapsible" data-collapsible="accordion" >
@@ -17,7 +26,7 @@
           <% if current_user.admin? %>
             <%= link_to 'Revisar', question %>
           <% else %>
-            <%= link_to 'Editar', edit_question_path(question) %> &nbsp
+            <%= link_to 'Editar', edit_question_path(question) %> &nbsp &nbsp
             <%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' } %>
           <%end%>
         </div>
@@ -61,7 +70,7 @@
         </div>
         <div class="col s4">
           <% unless current_user.admin? %>
-          <td><%= link_to 'Corrigir',  edit_question_path(question) %></td>
+          <td><%= link_to 'Corrigir',  edit_question_path(question) %></td>&nbsp &nbsp
           <td><%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
         </div>
@@ -124,7 +133,7 @@
 <% end %>
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large waves-effect waves-light red" href="<%= new_question_path %>">
+  <a class="btn-floating btn-large waves-effect waves-light" href="<%= new_question_path %>">
     <i class="material-icons">add</i>
   </a>
 </div>

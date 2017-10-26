@@ -1,59 +1,82 @@
-
-    <%= form_with(model: question, local: true) do |form| %>
-
-      <% if question.errors.any? %>
-      <div class="row" >
-        <div id="error_explanation" class="col s12 form-validation">
-          <h5> A questão pode ser salva, <%= pluralize(question.errors.count, "problema") %> :</h5>
-          <ul>
-          <% question.errors.full_messages.each do |message| %>
-            <li>- <i><%= message %></i></li>
-          <% end %>
-          </ul>
-        </div>
-      </div>
-      <% end %>
-
-      <div class="row">
-        <div class="input-field col s8">
-          <%= form.label :enuciado, for: :content %>
-          <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s8">
-          <%= form.label :fonte %>
-          <%= form.text_field :source, id: :question_source %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s8">
-          <%= form.label :ano %>
-          <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s8">
-          <h5>Alternativas</h5>
-        <%= form.fields_for :alternatives do |alter_forms| %>
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+        <div class="card-content">
+          <span class="card-title">Nova Questão</span>
+          <br>
           <div class="row">
-            <div class="col s2">
-              <%= alter_forms.check_box :correct, id:"correct_#{alter_forms.options[:child_index]}" %>
-              <%= alter_forms.label ' ', for:"correct_#{alter_forms.options[:child_index]}" %>
+            <div class="offset-s1 col s6">
+              <p>
+              <i>
+                Essa nova questão passará por uma avalição onde poderá ser
+                Reprovada ou Aprovada. Caso seja reprovada o avaliador fará
+                uma uma sugetão que poderá ser aplicada e submetida a questão
+                novamente.
+              </i>
+              </p>
             </div>
-            <div class="col s10">
-              <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
-              <%= alter_forms.text_area :content, id: :content, class: "materialize-textarea" %>
+            <br>
+            <br>
+            <br>
+            <div class="offset-s1 col s6">
+              <%= form_with(model: question, local: true) do |form| %>
+                <% if question.errors.any? %>
+                <div class="row" >
+                  <div id="error_explanation" class="col s10 form-validation">
+                    <h5> A questão pode ser salva, <%= pluralize(question.errors.count, "problema") %> :</h5>
+                    <ul>
+                    <% question.errors.full_messages.each do |message| %>
+                      <li>- <i><%= message %></i></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                </div>
+                <% end %>
+
+                <div class="row">
+                  <div class="input-field col s6">
+                    <%= form.label :fonte %>
+                    <%= form.text_field :source, id: :question_source %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s6">
+                    <%= form.label :ano %>
+                    <%= form.select :year, 2000..2017, {selected: 2017, id: :question_year},{class: "browser-default s8"} %>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="input-field col s10">
+                    <%= form.label :enuciado, for: :content %>
+                    <%= form.text_area :content, id: :question_content, class: "materialize-textarea" %>
+                  </div>
+                </div>
+           </div>
+           <div class="col s5">
+             <h5>Alternativas</h5>
+             <br>
+               <%= form.fields_for :alternatives do |alter_forms| %>
+                 <div class="row">
+                   <div class="col s2">
+                     <%= alter_forms.check_box :correct, id:"correct_#{alter_forms.options[:child_index]}" %>
+                     <%= alter_forms.label ' ', for:"correct_#{alter_forms.options[:child_index]}" %>
+                   </div>
+                   <div class="col 8">
+                     <%= alter_forms.label ('A'..'E').to_a[alter_forms.options[:child_index]], class: "filled-in" %>
+                     <%= alter_forms.text_area :content, id: :content, class: "materialize-textarea" %>
+                   </div>
+                 </div>
+               <% end %>
+           </div>
+
             </div>
           </div>
-        <% end %>
+        <div class="card-action">
+          <button class="btn waves-effect waves-light" name="action" type="submit">Salvar<i class="material-icons right">save</i></button>
+          &nbsp&nbsp&nbsp&nbsp<a href="/">Cancelar</button>
         </div>
+        <% end %>
       </div>
-
-      <div class="actions">
-        <button class="btn waves-effect waves-light" name="action" type="submit">Salvar<i class="material-icons right">save</i></button>
-      </div>
-    <% end %>
+    </div>
+  </div>

@@ -1,16 +1,21 @@
-<h2>Forgot your password?</h2>
+<div class="row">
+  <div class="offset-s2 col s8">
+    <div class="card">
+        <div class="card-content">
+          <span class="card-title">Esqueçeu sua senha?</span>
+          <p>Adicione o seu email abaixo que vamos mostrar como recupera-la.</p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-action">
+          <button class="btn waves-effect waves-light" name="action" type="submit">Enviar<i class="material-icons right">send</i></button>
+        </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
