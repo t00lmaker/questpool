@@ -1,9 +1,12 @@
-<% unless @pending.any? or @rejected.any? or @approved.any? %>
+<% unless (@pending.any? or @rejected.any? or @approved.any?) %>
   <div class="row">
     <div class="col offset-s2 s8">
       <p style="color: gray; font-size: 23px; text-align: center; margin-top: 30%">
-        Você não possui nenhuma questão cadastrada, use o botão abaixo para
-        cadastrar novas questões. </p>
+        Nenhuma questão cadastrada.
+        <% if !current_user.admin? %>
+         Você pode cadastrar novas questões utilizando o botão abaixo.
+        <% end %>
+      </p>
     </div>
   </div>
 <% end %>
