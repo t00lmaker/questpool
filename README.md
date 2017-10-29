@@ -22,12 +22,7 @@ Cada questão tem cinco alternativas associadas sendo que uma deve ser marcada c
 * Banco de Dados: Mysql
 * Schema de Autenticação: [Device](https://github.com/plataformatec/devise)
 * Sistema de Dependencias: [Bundler](http://bundler.io)
-* Configuration
-* Database creation
-* Database initialization
-* How to run the test suite
-* Services (job queues, cache servers, search engines, etc.)
-* Deployment instructions
+* Bibioteca de testes: [Rspec](http://rspec.info)
 
 
 ### Instalação
@@ -73,9 +68,12 @@ Se tudo ocorreu bem, você deve ver a seguinte tela:
 
 ![Tela Incial](https://user-images.githubusercontent.com/1520647/32140056-1f2f5eda-bc32-11e7-9e73-b5539b332e4a.png)
 
+### Testes
+  Para rodar os testes da aplicação utilize:
 
-
-Em seguida, rode os commandos para criação da base dados
+```
+bundle exec rspec
+```
 
 ### TODOS
 
