@@ -8,12 +8,17 @@
               <p>
               Esta questão está <i><%= @question.status %></i>
               </p>
+
             </div>
           </div>
           <div class="row">
             <p class="content">
               (<%= @question.source %>, <%= @question.year %>)&nbsp
               <%= @question.content %>
+              <br>
+              <p>
+               - por <i><%= @question.user.email %></i>
+              </p>
               <br>
             </p>
             <% i = 0%>
@@ -91,8 +96,7 @@
     <div class="modal-content">
       <h5>Faça uma sugestão para que a pegunta possa ser aprovada. </h5>
       <form id="disapprove_form_modal" class="" action="<%= disapprove_question_url(@question) %>" method="get">
-          <textarea type="text_area" name="hint">
-          </textarea>
+          <textarea type="text_area" name="hint"></textarea>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>

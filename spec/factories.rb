@@ -1,3 +1,6 @@
+# Factories use factory_bot_rails
+# (https://github.com/thoughtbot/factory_bot_rails)
+
 FactoryBot.define do
   factory :user, class: User do
     name "Luan"

@@ -47,7 +47,7 @@ rails db:create
 rails db:migrate
 ```
 
-5. O arquivo _db/seeds.rb_ possui um codigo ruby que cria um usuário administrador do sistema. O comando a baixo roda o código nesse arquivo e exibe as credenciais para acesso do sistema para o usuário administrado criado.
+5. O arquivo _db/seeds.rb_ possui um código Ruby que cria um usuário administrador do sistema. O comando abaixo roda o código nesse arquivo e exibe as credenciais para acesso do sistema para o usuário administrado criado.
 
 ```
 rails db:seed  
@@ -75,7 +75,11 @@ Se tudo ocorreu bem, você deve ver a seguinte tela:
 bundle exec rspec
 ```
 
-### TODOS
+### TODO
 
 * Tradução de campos e Modelos, hora funciona, hora não funciona.
+* Mensagens de erros estão aparecendo em ingles(ligado ao todo acima)
 * Metodos approve e disapprove estão como get, por conta de um problema com a autenticação do devise devem ser post.
+* Refatorar o question_controller_spec.rb
+* Criar funcionalidade para avaliar uma questão após a outra.
+* Limitar no controller para que o usuário comum não possa ter acesso as actions approve e disapprove. 

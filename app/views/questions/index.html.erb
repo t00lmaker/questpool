@@ -30,7 +30,6 @@
             <%= link_to 'Revisar', question %>
           <% else %>
             <%= link_to 'Editar', edit_question_path(question) %> &nbsp &nbsp
-            <%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' } %>
           <%end%>
         </div>
       </div>
