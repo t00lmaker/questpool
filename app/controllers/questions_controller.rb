@@ -19,11 +19,11 @@ class QuestionsController < ApplicationController
 
   # GET /questions/new
   def new
-    @question = Question.new(alternatives: [Alternative.new(content: "A"),
-                     Alternative.new(content: "B"),
-                     Alternative.new(content: "C"),
-                     Alternative.new(content: "D"),
-                     Alternative.new(content: "E")])
+    @question = Question.new(alternatives: [Alternative.new(),
+                     Alternative.new(),
+                     Alternative.new(),
+                     Alternative.new(),
+                     Alternative.new()])
   end
 
   # GET /questions/1/edit
@@ -77,12 +77,12 @@ class QuestionsController < ApplicationController
   def approve
     @question.approve!
     @question.save
-    redirect_to @question, notice: 'Questão foi aprovada!'
+    redirect_to question_path(@question), notice: 'Questão foi aprovada!'
   end
 
   def disapprove
     if params[:hint].nil? || params[:hint].empty?
-      redirect_to @question, alert: 'Dica é necessária para reprovar a questão!'
+      redirect_to question_path(@question), alert: 'Dica é necessária para reprovar a questão!'
     else
       @question.disapprove!(params[:hint], current_user)
       @question.save
