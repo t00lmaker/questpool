@@ -1,4 +1,4 @@
-# Questpool
+# Questpool (Desafio Técnico)
 
 Essa aplicação tem a finalidade de ser um repositório de questões, onde será
 possível criar questões que poderão ser avaliadas por um administrador, que
